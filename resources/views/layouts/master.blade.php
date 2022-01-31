@@ -8,12 +8,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Starter</title>
+  <title>Ticket | One</title>
 
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -170,7 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="./img/admin.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -191,38 +191,78 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <li class="nav-item">
+                <router-link to="/dashboard" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Tableau de bord
+                        </p>
+                </router-link>
+             </li>
+          
+
+          <li class="nav-item ">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fa fa-cog"></i>
               <p>
-                Starter Pages
+                Gestion
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="fas fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
+                <router-link to="/user" class="nav-link ">
+                  <i class="fas fa-users nav-icon text-blue"></i>
+                  <p>Utilisateurs</p>
+                </router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
+                <router-link to="/stade" class="nav-link">
+                  <i class="fas fa-ticket-alt nav-icon text-green"></i>
+                  <p>Tickets</p>
+                </router-link>
               </li>
+
+              <li class="nav-item">
+                <router-link to="/ticket" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Stade
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                  </p>
+                </router-link>
+              </li>
+
             </ul>
           </li>
+
+          
+
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+                <router-link to="/profile" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Profile
+                        </p>
+                </router-link>
+             </li>
+
+         
+          <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                     onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+                        
+                        <i class="nav-icon fa fa-power-off text-red"></i>
+                        <p>
+                          {{ __('Deconnexion') }}
+                        </p>  
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+             </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -237,14 +277,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
-          </div><!-- /.col -->
+            <h1 class="m-0">Panel Administrateur</h1>
+          </div>
+          <!-- /.col -->
+          <!--
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Starter Page</li>
             </ol>
-          </div><!-- /.col -->
+          </div>  -->
+          <!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -253,7 +296,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
+          <router-view></router-view>
+      <!--  <div class="row">
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
@@ -280,9 +324,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" class="card-link">Card link</a>
                 <a href="#" class="card-link">Another link</a>
               </div>
-            </div><!-- /.card -->
+            </div>
+            // /.card 
           </div>
-          <!-- /.col-md-6 -->
+          // /.col-md-6 
           <div class="col-lg-6">
             <div class="card">
               <div class="card-header">
@@ -308,9 +353,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div>
           </div>
-          <!-- /.col-md-6 -->
+          // /.col-md-6 
         </div>
-        <!-- /.row -->
+        < /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -334,7 +379,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy;2022 groupe-3 Keyce <a href="#">Ticket | One</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

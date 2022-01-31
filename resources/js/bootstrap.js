@@ -1,7 +1,10 @@
+
 window._ = require('lodash');
+//window.Popper = require('popper.js').default;
 
 try {
-    window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require("jquery");
+
     require('admin-lte');
     require('bootstrap');
 } catch (e) {}
